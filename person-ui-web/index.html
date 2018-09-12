@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="jquery-3.2.1.min.js"></script>
+    <script src="server-locations.js"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $.ajax({
+                type: 'GET',
+                url: 'XYZ endpoint ctry',
+                dataType: 'json',
+                success: function (data) {
+                    var tables = "";
+
+                    $.each(data, function (index, countryPerson) {
+                        tables = tables + '<table id="country">' +
+                            '<tr>' +
+                            '<th colspan="5">' + index + '</th>' +
+                            '</tr>' +
+                            '<tr>' +
+                            '<td>Id</td>' +
+                            '<td>Name</td>' +
+                            '<td>Last name</td>' +
+                            '<td>Additional info</td>' +
+                            '<td>Gender</td>' +
+                            '</tr>';
+
+                        $.each(countryPerson, function (index1, person) {
+                            tables = tables + '<tr>' +
+                                '<td>' + person.id + '</td>' +
+                                '<td>' + person.name + '</td>' +
+                                '<td>' + person.last_name + '</td>' +
+                                '<td>' + person.additonal_info + '</td>' +
+                                '<td>' + person.gender + '</td>' +
+                                '</tr>';
+                        });
+                        tables = tables + '</table>';
+                    });
+
+                    $(tables).appendTo('#tables') } })})
+
+    </script>
+</head>
+<body>
+
+<div id="tables"></div>
+
+</body>
+
+</html>
+
+

@@ -1,0 +1,31 @@
+service:
+    name: person-ui-web
+    fullName: person ui
+    groupName: person ui
+    description: facebook 2.0
+    gpmCode: ??????
+    version: 1.0
+    tier: web
+    maintainer:
+        name: Team Pint Maniacs
+        email: pint-maniacs@bisnode.com
+    categories:
+      - fooBar
+    replicas: 1
+containers:
+    default:
+        variables:
+            API_ENDPOINT: https://svc-dev-cluster1.blue.bisnode.net/di-rest-svc/v1/aggregateddata/ctry
+        ports:
+            - 80
+        livenessProbe:
+            httpGet:
+                path: /ping/index.html
+                port: 80
+            initialDelaySeconds: 180
+            timeoutSeconds: 5
+        readinessProbe:
+            httpGet:
+                path: /ping/index.html
+                port: 80
+            timeoutSeconds: 5                                
